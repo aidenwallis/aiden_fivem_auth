@@ -19,6 +19,7 @@ type DB interface {
 	Ping(ctx context.Context) error
 
 	CreateSession(ctx context.Context, session *models.Session, identifiers []string) error
+	DropSession(ctx context.Context, identifiers []string) (int, error)
 	ExpireSessions(context.Context) (int, error)
 	Session(ctx context.Context, tokenHash string) (*models.Session, error)
 }

@@ -20,3 +20,7 @@ export type CreateSessionResponseBody = {
 };
 
 export type CreateSessionResponse = ApiError | CreateSessionResponseBody;
+
+export function isApiError(body: CreateSessionResponse): body is ApiError {
+  return (body as ApiError)?.message !== undefined;
+}

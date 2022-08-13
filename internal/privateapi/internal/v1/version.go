@@ -21,5 +21,6 @@ func NewVersion(b backend.Backend, log *zap.Logger) func(chi.Router) {
 
 	return func(r chi.Router) {
 		r.Post("/sessions", v.CreateSession)
+		r.Post("/drop-session", v.DropSession)
 	}
 }

@@ -38,6 +38,13 @@ type SessionInput struct {
 	Metadata    json.RawMessage `json:"metadata"`
 }
 
+// DropSessionInput defines the drop session input schema
+//
+// swagger:model
+type DropSessionInput struct {
+	Identifiers []string `json:"identifiers" validate:"min=1"`
+}
+
 func resolveMetadata(v string) map[string]interface{} {
 	if v == "" {
 		return nil

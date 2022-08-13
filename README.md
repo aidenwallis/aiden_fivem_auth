@@ -1,4 +1,4 @@
-# fivem-external-sessions
+# aiden_fivem_auth
 
 A way to authorize FiveM sessions... outside of FiveM. This project is written in TypeScript for FiveM integration, and a HTTP server in Go. It runs another HTTP service on your server, and exposes two HTTP addresses.
 

@@ -2,8 +2,10 @@ const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
+  target: "node",
   entry: {
-    // backend: path.join(__dirname, "src/backend/index.ts"),
+    client: path.join(__dirname, "./src/fivem-client/index.ts"),
+    server: path.join(__dirname, "./src/fivem-server/index.ts"),
   },
   module: {
     rules: [
@@ -13,6 +15,9 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: [".ts"],
   },
   plugins: [new ESLintPlugin()],
   output: {
