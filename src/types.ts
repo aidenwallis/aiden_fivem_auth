@@ -1,0 +1,22 @@
+// from internal/schema/codes/error_code.go
+export enum ApiCode {
+  Unknown = 0,
+  InvalidBody = 1,
+  ValidationError = 2,
+  InvalidToken = 3,
+}
+
+export type ApiError = {
+  code: ApiCode;
+  message: string;
+};
+
+export type CreateSessionResponseBody = {
+  identifiers: string[];
+  metadata: unknown;
+  created_at: string;
+  expires_at: string;
+  token: string;
+};
+
+export type CreateSessionResponse = ApiError | CreateSessionResponseBody;
