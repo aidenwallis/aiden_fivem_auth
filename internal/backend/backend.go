@@ -12,6 +12,7 @@ import (
 
 // Backend represents all functions available from the backend.
 type Backend interface {
+	ClearSessions(context.Context) error
 	CreateSession(ctx context.Context, identifiers []string, metadata json.RawMessage) (*models.Session, string, error)
 	DropSession(ctx context.Context, identifiers []string) error
 	IsHealthy(context.Context) bool

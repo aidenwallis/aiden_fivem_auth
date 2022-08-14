@@ -1,3 +1,5 @@
+import "./events";
+
 import { tokenClient } from "./client";
 
 // getSessionToken lets other scripts pull the active session token

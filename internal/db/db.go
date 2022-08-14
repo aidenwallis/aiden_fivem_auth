@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 
 	"github.com/aidenwallis/fivem-external-sessions/internal/config"
 	"github.com/aidenwallis/fivem-external-sessions/internal/db/models"
@@ -18,6 +19,7 @@ type DB interface {
 	Bun() *bun.DB
 	Ping(ctx context.Context) error
 
+	ClearSessions(ctx context.Context, before time.Time) (int, error)
 	CreateSession(ctx context.Context, session *models.Session, identifiers []string) error
 	DropSession(ctx context.Context, identifiers []string) (int, error)
 	ExpireSessions(context.Context) (int, error)

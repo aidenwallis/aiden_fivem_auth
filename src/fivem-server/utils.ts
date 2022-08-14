@@ -5,7 +5,7 @@ import { CreateSessionResponse } from "../types";
 export const sleep = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
 
 const serviceHost_ = () => GetConvar("aiden_fivem_auth_internal_addr", "");
-const fetch_ = <T>(options: { path: string; body: T }) =>
+const fetch_ = <T>(options: { path: string; body?: T }) =>
   fetch(options.path, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -30,6 +30,25 @@ export const createSession = (identifiers: string[]) => {
       },
     },
   }).then((resp) => resp.json() as unknown as CreateSessionResponse);
+};
+
+export const clearSessions = () => {
+  const serviceHost = serviceHost_();
+  if (!serviceHost) {
+    return;
+  }
+
+  return fetch_({ path: serviceHost + "/v1/clear-sessions" })
+    .then((resp) => {
+      if (resp.status !== 200) {
+        throw new Error(`Non 200 http status code returned: ${resp.status}`);
+      }
+
+      console.log("Cleared sessions!");
+    })
+    .catch((error) => {
+      console.error(`Failed to clear sessions: ${error.toString()}`);
+    });
 };
 
 export const dropSession = async (identifiers: string[]) => {

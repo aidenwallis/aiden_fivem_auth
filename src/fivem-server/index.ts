@@ -1,5 +1,5 @@
 import { ApiCode, CreateSessionResponse, EventType } from "../types";
-import { createSession, dropSession } from "./utils";
+import { clearSessions, createSession, dropSession } from "./utils";
 
 // handle token request events
 onNet(EventType.TokenRequest, () => {
@@ -19,4 +19,8 @@ onNet(EventType.TokenRequest, () => {
 on("playerDropped", () => {
   const source = global.source;
   setImmediate(() => dropSession(getPlayerIdentifiers(source)));
+});
+
+setImmediate(() => {
+  clearSessions();
 });
