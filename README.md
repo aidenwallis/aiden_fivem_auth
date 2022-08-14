@@ -4,6 +4,24 @@ A way to authorize FiveM sessions... outside of FiveM. This project is written i
 
 This is my first time messing with FiveM, I'm using this project as a way to understand the underlying APIs better.
 
+## Convars
+
+### `aiden_fivem_auth_internal_addr`
+
+Set this convar to point the FiveM scripts to your running instance of the Go server, by default, you should set this to `http://localhost:3341`. **Do not include a trailing slash.**
+
+## Exports
+
+This resource provides two [exports](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/#using-exports) that you may use to invoke functions from within the resource.
+
+### `getSessionToken`
+
+Returns the current session token, if there is none, it will return an empty string.
+
+### `forceSessionRefresh`
+
+You should use this to force a reload of the session token, if for some reason the one you have becomes invalid before the expiry. **You should never need to do this, the resource manages token refreshing for you!**
+
 ## Dependencies
 
 You will need to know how to setup HTTP servers, use firewalls, and setup a relational database. If you're not confident with these things, you probably shouldn't use this project.
@@ -25,7 +43,3 @@ There's a few benefits to this:
 - You can decouple your server-side code from the actual runtime of the server, that means you can deploy and make updates to that service, without any players on your server ever noticing.
 
 - The FiveM main process has a lot going on, especially with a lot of mods, offloading that work (this even gives you the ability to offload to another server entirely!) means you can remove some excess traffic and bring better performance to that very expensive process.
-
-### Why build this?
-
-Authorizing stateful sessions is far from a novel concept, this is how most of the web works. I wanted to bring something similar to FiveM that's entirely decoupled from the main ecosystem.

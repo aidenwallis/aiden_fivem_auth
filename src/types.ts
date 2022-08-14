@@ -21,6 +21,11 @@ export type CreateSessionResponseBody = {
 
 export type CreateSessionResponse = ApiError | CreateSessionResponseBody;
 
+export enum EventType {
+  TokenRequest = "aiden:fivem_auth::token:request",
+  TokenResponse = "aiden:fivem_auth::token:response",
+}
+
 export function isApiError(body: CreateSessionResponse): body is ApiError {
   return (body as ApiError)?.message !== undefined;
 }
